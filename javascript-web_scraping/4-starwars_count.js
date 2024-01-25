@@ -3,7 +3,7 @@
 const request = require('request');
 
 // Getting the url to request from the command line arguments
-const url = 'https://swapi-api.hbtn.io/api/films/';
+const url = process.argv[2];
 const characterId = 18;
 let appearanceCount = 0;
 
@@ -14,8 +14,10 @@ request.get(url, (err, response, body) => {
   const films = JSON.parse(body);
 
   for (const film of films.results) {
-    if (film.characters.includes(`https://swapi-api.hbtn.io/api/people/${characterId}/`)) {
-      appearanceCount++;
+    for (const character of film.characters) {
+      if (character.includes(characterId)) {
+        appearanceCount++;
+      }
     }
   }
   console.log(appearanceCount);
