@@ -1,19 +1,14 @@
-// Display a message prompting the user for their name.
-process.stdout.write('Welcome to Holberton School, what is your name?\n');
+process.stdin.setEncoding('utf8');
 
-// Listen for data events on the standard input stream.
+const welcomeMessage = 'Welcome to Holberton School, what is your name?';
+process.stdout.write(`${welcomeMessage}\n`);
+
 process.stdin.on('readable', () => {
-  // Read the input data from the standard input stream.
-  const input = process.stdin.read();
-
-  // Check if there is any input provided by the user.
-  if (input !== null) {
-    // If input is provided, display a message with the user's name.
-    process.stdout.write(`Your name is: ${input}`);
+  const userInput = process.stdin.read();
+  if (userInput) {
+    process.stdout.write(`Your name is: ${userInput}`);
   }
-});
-
-process.stdin.on('end', () => {
-  // Display a closing message.
   process.stdout.write('This important software is now closing\n');
+
+  process.exit();
 });
