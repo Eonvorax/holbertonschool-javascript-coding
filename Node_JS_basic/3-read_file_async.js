@@ -37,7 +37,7 @@ async function countStudents(path) {
       console.log(`Number of students in SWE: ${sweCount}. List: ${sweList.join(', ')}`);
     })
     .catch(() => {
-      throw new Error('Cannot load the database');
+      throw new Error('Error: Cannot load the database');
     });
 }
 
